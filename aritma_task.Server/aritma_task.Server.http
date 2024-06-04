@@ -1,0 +1,6 @@
+@aritma_task.Server_HostAddress = http://localhost:5130
+
+GET {{aritma_task.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
