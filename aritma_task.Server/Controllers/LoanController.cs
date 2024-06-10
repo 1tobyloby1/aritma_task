@@ -26,6 +26,12 @@ public class LoanController(ILoanService loanService) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<LoanResponse>> CalculateLoan([FromBody] LoanRequest loanRequest)
     {
+        if (!ModelState.IsValid)
+        {
+            var error = ModelState.Values.SelectMany(v => v.Errors).First().ErrorMessage;
+            throw new ArgumentException(error);
+        }
+        
         var loan = await loanService.CalculateLoan(loanRequest);
         return Ok(loan);
     }

@@ -1,4 +1,5 @@
 using aritma_task.Server;
+using aritma_task.Server.Middleware;
 using aritma_task.Server.Repositories;
 using aritma_task.Server.Services;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,11 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(
+    options => {
+        options.SuppressModelStateInvalidFilter = true;     
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,6 +39,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
