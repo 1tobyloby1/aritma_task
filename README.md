@@ -58,11 +58,11 @@ of concerns and facilitating maintenance and scalability.
 
 The following table lists the API endpoints available in this application along with their descriptions:
 
-| Endpoint                        | Method | Description                                                      |
-|---------------------------------|--------|------------------------------------------------------------------|
-| `/api/loans`                    | GET    | Retrieves all loans from the database                            |
-| `/api/loans/calculate`          | POST   | Calculates the loan payment plan based on the provided loan data |
-| `/api/loanTypes`                | GET    | Retrieves all loan types from the database                       |
+| Endpoint                | Method | Description                                                      |
+|-------------------------|--------|------------------------------------------------------------------|
+| `/api/loans`            | GET    | Retrieves all loans from the database                            |
+| `/api/loans`            | POST   | Calculates the loan payment plan based on the provided loan data |
+| `/api/loanTypes`        | GET    | Retrieves all loan types from the database                       |
 
 
 ## Testing
