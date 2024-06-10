@@ -1,0 +1,32 @@
+using aritma_task.Server.Dto.Request;
+using aritma_task.Server.Dto.Response;
+using aritma_task.Server.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace aritma_task.Server.Controllers;
+
+[ApiController]
+[Route("api/loans")]
+public class LoanController(ILoanService loanService) : ControllerBase
+{
+    [HttpGet("types")]
+    public async Task<ActionResult<IEnumerable<LoanTypeResponse>>> GetAllLoanTypes()
+    {
+        var types = await loanService.GetAllLoanTypes();
+        return Ok(types);
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<LoanResponse>>> GetAllLoans()
+    {
+        var loans = await loanService.GetAllLoans();
+        return Ok(loans);
+    }
+    
+    [HttpPost]
+    public async Task<ActionResult<LoanResponse>> CalculateLoan([FromBody] LoanRequest loanRequest)
+    {
+        var loan = await loanService.CalculateLoan(loanRequest);
+        return Ok(loan);
+    }
+}
