@@ -1,5 +1,6 @@
 using aritma_task.Server.Dto.Request;
 using aritma_task.Server.Dto.Response;
+using aritma_task.Server.Models;
 using aritma_task.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,18 @@ public class LoanController(ILoanService loanService) : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<LoanResponse>>> GetAllLoans()
+    public async Task<ActionResult<IEnumerable<LoanResponse>>> GetAllLoans([FromQuery] int? loanType)
     {
-        var loans = await loanService.GetAllLoans();
+        IEnumerable<LoanResponse> loans;
+        if (loanType.HasValue)
+        {
+            loans = await loanService.GetAllLoansByType(loanType.Value);
+        }
+        else
+        {
+            loans = await loanService.GetAllLoans();
+        }
+        
         return Ok(loans);
     }
     

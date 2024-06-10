@@ -9,4 +9,12 @@ public class LoanRepository(ApplicationDbContext context) : ILoanRepository
     {
         return await context.Loans.Include(l => l.LoanType).ToListAsync();
     }
+    
+    public async Task<IEnumerable<Loan>> GetAllLoansByType(int loanType)
+    {
+        return await context.Loans
+            .Include(l => l.LoanType)
+            .Where(l => l.LoanTypeId == loanType)
+            .ToListAsync();
+    }
 }

@@ -41,6 +41,12 @@ public class LoanService(ILoanTypeRepository loanTypeRepository, ILoanRepository
         return loanTypesResponse;
     }
 
+    public async Task<IEnumerable<LoanResponse>> GetAllLoansByType(int loanType)
+    {
+        var loans = await loanRepository.GetAllLoansByType(loanType);
+        return mapper.Map<IEnumerable<LoanResponse>>(loans);
+    }
+
     public async Task<LoanResponse> CalculateLoan(LoanRequest loanRequest)
     {
         var loan = mapper.Map<Loan>(loanRequest);

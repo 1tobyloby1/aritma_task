@@ -8,5 +8,6 @@ public interface ILoanService
 {
     Task<IEnumerable<LoanResponse>> GetAllLoans();
     Task<IEnumerable<LoanTypeResponse>> GetAllLoanTypes();
+    Task<IEnumerable<LoanResponse>> GetAllLoansByType(int loanType);
     Task<LoanResponse> CalculateLoan(LoanRequest loan);
 }
