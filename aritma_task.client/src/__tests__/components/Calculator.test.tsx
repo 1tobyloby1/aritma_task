@@ -1,8 +1,16 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Calculator from '../../components/Calculator';
+import LoanRequest from "../../models/LoanRequest.ts";
 
 test('renders Calculator component', () => {
-    render(<Calculator />);
-    const linkElement = screen.getByText(/calculate/i);
-    expect(linkElement).toBeInTheDocument();
+    const mockLoanRequest: LoanRequest = {
+        loanTypeId: 1,
+        amount: 500000,
+        termInYears: 2
+    };
+    
+    render(<Calculator loanRequest={mockLoanRequest} />);
+
+    const calculateButton = screen.getByText("Regn ut");
+    fireEvent.click(calculateButton);
 });
